@@ -17,6 +17,8 @@ var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
+	 * The window object is supported by all browsers. It represents the browser's window.
+	 * All global JavaScript objects, functions, and variables automatically become members of the window object.
      */
     var doc = global.document,
         win = global.window,
