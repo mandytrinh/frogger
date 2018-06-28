@@ -44,10 +44,17 @@
         } else {
             /* This URL has not been previously loaded and is not present
              * within our cache; we'll need to load this image.
+			* The Image() constructor creates a new HTMLImageElement instance.
+			* It is functionally equivalent to document.createElement('img').
              */
             var img = new Image();
             img.onload = function() {
-                /* Once our image has properly loaded, add it to our cache
+
+                /* 
+				* The onload property of the GlobalEventHandlers mixin is an event handler 
+				* for the load event of a Window, XMLHttpRequest, <img> element, etc., 
+				* which fires when the resource has loaded.
+				Once our image has properly loaded, add it to our cache
                  * so that we can simply return this image if the developer
                  * attempts to load this file in the future.
                  */
