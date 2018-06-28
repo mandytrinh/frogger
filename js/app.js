@@ -16,6 +16,11 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 	this.x += this.speed * dt; //moves the bug horizontally (x-coord wise)
+	
+	if (this.x > 505)
+	{
+		this.x =-200;
+	}
 };
 
 // Draw the enemy on the screen, required method for game
@@ -23,9 +28,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own PLAYER CLASS
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player Class
 
 var Player = function()
 {
@@ -70,14 +73,18 @@ Player.prototype.handleInput = function(input)
 // Place the player object in a variable called player
 let allEnemies = [];
 
-for (let i = 0; i < 4; i++)
+function generateEnemies()
 {
-	let x = 0; //start from left
-	let y = Math.random() * 404 + 80; // occupies stone rows 1-3, y coords 101-404
-	let speed = (Math.random() * 400) + 50;
-	allEnemies.push(new Enemy(x, y, speed));
+	for (let i = 0; i < 5; i++)
+	{
+		let x = 0; //start from left
+		let y = Math.random() * (325 - 130) + 60; // randomize cords to occupies stone rows 1-3
+		let speed = Math.random() * (175 - 50) + 30;
+		allEnemies.push(new Enemy(x, y, speed));
+	}
 }
 
+generateEnemies();
 console.log(allEnemies);
 
 let player = new Player();
