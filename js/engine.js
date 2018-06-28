@@ -30,14 +30,17 @@ var Engine = (function(global) {
     doc.body.appendChild(canvas);
 	
 	 // Getting mouse position to determine x & y coordinates
-	canvas.addEventListener('mousemove', function(evt) {
+	canvas.addEventListener('mousemove', function(evt) 
+	{
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse position: x ' + Math.floor(mousePos.x) + ', y:' + Math.floor(mousePos.y);
         console.log(canvas, message);
-      }, false);
-	  	function getMousePos(canvas, evt) {
+     }, false);
+	 
+      function getMousePos(canvas, evt) 
+	  {
         var rect = canvas.getBoundingClientRect();
-        return {
+        return { //weird JS quirk: cannot put curly braces on separate line for return statements otherwise syntax error
           x: evt.clientX - rect.left,
           y: evt.clientY - rect.top
         };
