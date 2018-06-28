@@ -36,7 +36,7 @@ var Player = function()
 	this.x = 200;
 	this.y = 400;
 	this.speed = 30;
-	this.sprite = "images/char-boy.png";
+	this.sprite = "images/char-cat-girl.png";
 };
 
 Player.prototype.render = function()
@@ -46,9 +46,24 @@ Player.prototype.render = function()
 
 Player.prototype.update = function(dt)
 {
-	this.y += this.speed * dt;
-	
-}
+	if (this.y > 430) // when hits bottom boundary
+	{
+		this.y = 430;
+	}
+	if (this.x < 0) // when hits left boundary
+	{
+		this.x = 0;
+	}
+	if (this.x > 400) //when hits right boundary
+	{
+		this.x = 400;
+	}
+	if (this.y < 30) //when reaches the blue field, reset position
+	{
+		this.x = 200;
+		this.y = 400;
+	}
+};
 
 Player.prototype.handleInput = function(input)
 {
@@ -67,7 +82,7 @@ Player.prototype.handleInput = function(input)
 			this.y += dy;
 			break;
 	}
-}
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -88,7 +103,6 @@ generateEnemies();
 console.log(allEnemies);
 
 let player = new Player();
-console.log("player" + player.x);
 
 
 // This listens for key presses and sends the keys to your
