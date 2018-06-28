@@ -25,10 +25,23 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
-
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+	
+	 // Getting mouse position to determine x & y coordinates
+	canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: x ' + Math.floor(mousePos.x) + ', y:' + Math.floor(mousePos.y);
+        console.log(canvas, message);
+      }, false);
+	  	function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
