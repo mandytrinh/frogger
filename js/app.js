@@ -16,7 +16,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 	this.x += this.speed * dt; //moves the bug horizontally (x-coord wise)
-	
+	this.hasCollided();
 	if (this.x > 505)
 	{
 		this.x =-200;
@@ -27,6 +27,15 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Enemy.prototype.hasCollided = function()
+{
+	if (this.x === player.x || this.y === player.y || this.y === player.y - 100 || this. x === player.x - 100)
+	{
+		player.x = 200;
+		player.y = 400;
+	}
+}
 
 // Player Class
 
@@ -90,11 +99,11 @@ let allEnemies = [];
 
 function generateEnemies()
 {
-	for (let i = 0; i < 5; i++)
+	for (let i = 0; i < 3; i++)
 	{
 		let x = 0; //start from left
 		let y = Math.random() * (325 - 130) + 60; // randomize cords to occupies stone rows 1-3
-		let speed = Math.random() * (175 - 50) + 30;
+		let speed = Math.random() * (325 - 130) + 60;
 		allEnemies.push(new Enemy(x, y, speed));
 	}
 }
