@@ -1,6 +1,6 @@
 let dx = 101; // distance in x direction
 let dy = 83; // distance in y direction
-
+let points = 0;
 var Enemy = function(x, y, speed) {
 
     this.sprite = "images/enemy-bug.png";
@@ -51,6 +51,9 @@ var Player = function()
 Player.prototype.render = function()
 {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	ctx.font = "30px impact";
+	ctx.lineWidth = 2;
+	ctx.strokeText("Points: " + points, 50,  30);
 };
 
 Player.prototype.update = function(dt)
@@ -69,6 +72,7 @@ Player.prototype.update = function(dt)
 	}
 	if (this.y < 30) //when reaches the blue field, reset position
 	{
+		points += 1;
 		this.x = 200;
 		this.y = 400;
 	}
