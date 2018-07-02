@@ -30,10 +30,17 @@ Enemy.prototype.render = function() {
 
 Enemy.prototype.hasCollided = function()
 {
-	if (this.x === player.x || this.y === player.y || this.y === player.y - 100 || this. x === player.x - 100)
+	    if (player.x - 60 < this.x && player.x + 40 > this.x && player.y - 15 < this.y && player.y + 30 > this.y)
 	{
-		player.x = 200;
-		player.y = 400;
+		if (points > 0)
+		{
+			points -= 1;
+		}		
+		else
+		{
+			points = 0;
+		}
+		player.resetPlayer();
 	}
 }
 
@@ -44,8 +51,8 @@ var Player = function()
 	//position at middle bottom (around 3rd column, 4th row)
 	this.x = 200;
 	this.y = 400;
-	this.speed = 30;
-	this.sprite = "images/char-cat-girl.png";
+	this.speed = 50;
+	this.sprite = "images/char-princess-girl.png";
 };
 
 Player.prototype.render = function()
@@ -55,7 +62,11 @@ Player.prototype.render = function()
 	ctx.lineWidth = 2;
 	ctx.strokeText("Points: " + points, 50,  30);
 };
-
+Player.prototype.resetPlayer = function()
+{
+	this.x = 200;
+	this.y = 400;
+};
 Player.prototype.update = function(dt)
 {
 	if (this.y > 430) // when hits bottom boundary
@@ -70,11 +81,10 @@ Player.prototype.update = function(dt)
 	{
 		this.x = 400;
 	}
-	if (this.y < 30) //when reaches the blue field, reset position
+	if (this.y < 30) //when reaches the blue field, add 1 point & reset position
 	{
 		points += 1;
-		this.x = 200;
-		this.y = 400;
+		this.resetPlayer();
 	}
 };
 
@@ -103,7 +113,7 @@ let allEnemies = [];
 
 function generateEnemies()
 {
-	for (let i = 0; i < 3; i++)
+	for (let i = 0; i < 5; i++)
 	{
 		let x = 0; //start from left
 		let y = Math.random() * (325 - 130) + 60; // randomize cords to occupies stone rows 1-3
