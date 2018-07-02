@@ -1,6 +1,8 @@
+// Global Variables
 let dx = 101; // distance in x direction
 let dy = 83; // distance in y direction
-let points = 0;
+let points = 0, lives = 3, hits = 0, isGameOver = false;
+// Enemy Class
 var Enemy = function(x, y, speed) {
 
     this.sprite = "images/enemy-bug.png";
@@ -32,11 +34,16 @@ Enemy.prototype.hasCollided = function()
 {
 	    if (player.x - 60 < this.x && player.x + 40 > this.x && player.y - 15 < this.y && player.y + 30 > this.y)
 	{
+		if (lives > 0)
+		{
+			lives -= 1;
+			player.calculateLives();
+		}
 		if (points > 0)
 		{
 			points -= 1;
 		}		
-		else
+		else if (points === 0)
 		{
 			points = 0;
 		}
@@ -61,12 +68,24 @@ Player.prototype.render = function()
 	ctx.font = "30px impact";
 	ctx.lineWidth = 2;
 	ctx.strokeText("Points: " + points, 50,  30);
+	ctx.strokeText("Lives: " + lives, 280, 30);
 };
+
 Player.prototype.resetPlayer = function()
 {
 	this.x = 200;
 	this.y = 400;
 };
+
+Player.prototype.calculateLives = function()
+{
+	hits += 1;
+	if (hits === 3)
+	{
+		isGameOver = true;
+	}
+}
+
 Player.prototype.update = function(dt)
 {
 	if (this.y > 430) // when hits bottom boundary
@@ -113,7 +132,7 @@ let allEnemies = [];
 
 function generateEnemies()
 {
-	for (let i = 0; i < 5; i++)
+	for (let i = 0; i < 4; i++)
 	{
 		let x = 0; //start from left
 		let y = Math.random() * (325 - 130) + 60; // randomize cords to occupies stone rows 1-3

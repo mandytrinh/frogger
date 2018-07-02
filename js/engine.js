@@ -138,7 +138,7 @@ var Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -156,8 +156,20 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
-        renderEntities();
+		if (isGameOver)
+		{
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+			ctx.font = "50px impact";
+			ctx.lineWidth = 3;
+			ctx.strokeText("GAME OVER!", 100, 300);
+			ctx.font = "20px arial";
+			ctx.lineWidth = 1;
+			ctx.strokeText("(Refresh the page to try again)", 90, 400);
+		}
+        else
+		{
+			renderEntities();
+		}
     }
 
     /* This function is called by the render function and is called on each game
