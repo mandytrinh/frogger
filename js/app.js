@@ -2,7 +2,8 @@
 let dx = 101; // distance in x direction
 let dy = 83; // distance in y direction
 let points = 0, lives = 3, hits = 0, isGameOver = false;
-// Enemy Class
+
+// ENEMY CLASS
 var Enemy = function(x, y, speed) {
 
     this.sprite = "images/enemy-bug.png";
@@ -12,11 +13,8 @@ var Enemy = function(x, y, speed) {
 };
 
 // Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Parameter: dt, a time delta between ticks, multiplying it by movement ensures game runs at same speed
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the delta (dt parameter)
-    // which will ensure the game runs at the same speed for
-    // all computers.
 	this.x += this.speed * dt; //moves the bug horizontally (x-coord wise)
 	this.hasCollided();
 	if (this.x > 505)
@@ -51,15 +49,14 @@ Enemy.prototype.hasCollided = function()
 	}
 }
 
-// Player Class
+// PLAYER CLASS
 
 var Player = function()
 {
 	//position at middle bottom (around 3rd column, 4th row)
 	this.x = 200;
 	this.y = 400;
-	this.speed = 50;
-	this.sprite = "images/char-princess-girl.png";
+	this.sprite = "images/char-cat-girl.png";
 };
 
 Player.prototype.render = function()
@@ -84,7 +81,7 @@ Player.prototype.calculateLives = function()
 	{
 		isGameOver = true;
 	}
-}
+};
 
 Player.prototype.update = function(dt)
 {
@@ -125,9 +122,7 @@ Player.prototype.handleInput = function(input)
 			break;
 	}
 };
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+
 let allEnemies = [];
 
 function generateEnemies()
@@ -146,9 +141,7 @@ console.log(allEnemies);
 
 let player = new Player();
 
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to Player.handleInput() method. 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
