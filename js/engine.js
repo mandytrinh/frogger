@@ -159,12 +159,12 @@ var Engine = (function(global) {
 		if (isGameOver)
 		{
 			ctx.clearRect(0,0,canvas.width,canvas.height);
-			ctx.font = "50px impact";
+			ctx.font = "50pt impact";
 			ctx.lineWidth = 3;
 			ctx.strokeText("GAME OVER!", 100, 300);
-			ctx.font = "20px arial";
+			ctx.font = "20pt arial";
 			ctx.lineWidth = 1;
-			ctx.strokeText("(Refresh the page to try again)", 90, 400);
+			ctx.fillText("(Refresh the page to try again)", 90, 400);
 		}
         else
 		{
